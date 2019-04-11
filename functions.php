@@ -1,4 +1,9 @@
 <?php
+/**
+ * Adding shortcode for Latest posts
+ * 
+ * @link https://github.com/RadeSRB/latest-post-shortcode
+ */
 function sh_add_latest_posts($atts = null) { 
 	global $post;
 
@@ -23,16 +28,16 @@ function sh_add_latest_posts($atts = null) {
 		if(get_comments_number() == 0) {
 			$comments = 'No Comments';
 		} else {
-			$comments = get_comments_number();
+			$comments = get_comments_number() . ' Comments';
 		}
-		$excerpt = get_the_excerpt();
-
+		$post_date = get_the_date();
+		
 		$html .= '<div class="post-item">';			
 
 			$html .= '<a href="' . $link . '">';
 			if (has_post_thumbnail()) {				
 				$post_thumbnail_id = get_post_thumbnail_id($post);
-				$imgLink = wp_get_attachment_image_url($post_thumbnail_id, 'news-thumbnail');
+				$imgLink = wp_get_attachment_image_url($post_thumbnail_id, 'thumbnail');
 
 				$html .= '<figure class="wp-block-image">';
 					$html .= '<img src="' . $imgLink . '" alt="' . $title . '">';
@@ -43,16 +48,21 @@ function sh_add_latest_posts($atts = null) {
 				$html .= '</figure>';
 			}
 			$html .= '</a>';
+			
+			$html .= '<h2 class="post-title">';
+				$html .= '<a href="' . $link . '">';
+					$html .= $title;
+				$html .= '</a>';
+			$html .= '</h2>';
 
-			$html .= '<a href="' . $link . '">';
-				$html .= '<h2 class="post-title">' . $title . '</h2>';
-			$html .= '</a>';
+			$format = '<p class="light-text"> %s - %s</p>';
+			$html .= sprintf($format, $post_date, $comments);
 
-			$html .= '<p class="light-text">' . get_the_date() . ' - ' . $comments . '</p>';
+			if(has_excerpt()) {
+				$html .= '<p class="post-excerpt">' . get_the_excerpt() . '</p>';
+			}
 
-			$html .= '<p class="post-excerpt">' . $excerpt . '</p>';
-
-			$html .= '<a href="' . $link . '" class="orange-link">Read More &#187;</a>';
+			$html .= '<a href="' . $link . '" class="read-more-link">Read More &#187;</a>';
 
 		$html .= '</div>';
 	}

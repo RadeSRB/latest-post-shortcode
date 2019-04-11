@@ -13,7 +13,7 @@ function sh_add_latest_posts($atts = null) {
 	}
 	
 
-	$getPosts = get_posts($args);
+	$getPosts = WP_Query($args);
 	
 	$html = '<div class="post-items post-columns-' . $a['per_line'] . '">';
 	foreach ( $getPosts as $post ) {

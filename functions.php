@@ -1,3 +1,4 @@
+<?php
 function sh_add_latest_posts($atts = null) { 
 	global $post;
 

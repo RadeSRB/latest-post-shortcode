@@ -38,7 +38,7 @@ function sh_add_latest_posts($atts = null) {
 				$html .= '</figure>';
 			} else {
 				$html .= '<figure class="wp-block-image">';
-					$html .= '<img src="' . get_template_directory_uri() . '/img/Voya-Brand-Orange.jpg" alt="' . $title . '">';
+					$html .= '<img src="' . get_template_directory_uri() . '/img/placeholder.jpg" alt="' . $title . '">';
 				$html .= '</figure>';
 			}
 			$html .= '</a>';
